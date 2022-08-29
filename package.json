@@ -7,12 +7,13 @@
     "lumo": "bin/lumo.js"
   },
   "dependencies": {
-    "cheerio": "^1.0.0-rc.3",
     "fs-extra": "^9.0.0",
-    "nanoid": "^3.1.3",
     "serve-handler": "^6.1.2",
-    "tiny-glob": "^0.2.6",
-    "trash": "^6.1.1",
-    "yargs": "^15.3.1"
+    "trash": "^6.1.1"
+  },
+  "devDependencies": {
+    "@types/node": "^18.7.13",
+    "prettier": "^2.7.1",
+    "typescript": "^4.8.2"
   }
 }
