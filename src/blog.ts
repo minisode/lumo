@@ -1,3 +1,4 @@
+import { createPage } from './page'
 import glob from 'fast-glob'
 
 function getPaths() {
@@ -10,20 +11,20 @@ function getUserConfig() {
 
 export class Blog {
   readonly paths: string[]
-  readonly posts: string[]
+  readonly posts: any[]
 
-  constructor() {
+  constructor(config: any) {
     this.paths = getPaths()
   }
 
   async build() {
+    for (const path of this.paths) {
+      const page = createPage(path)
+      await page.outputHtml()
+
+      if (page.layout === 'post') {
+        this.posts.push(page)
+      }
+    }
   }
 }
-
-// this.site = site.configuration()
-// this.pages = this.site
-// for (let post of this.posts) {
-//   this.site.paths.push({ params: { slug: post.slug } })
-// }
-// export function blog(config: UserConfig) {
-// await trash('_api/**/*.json')

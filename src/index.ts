@@ -1,5 +1,29 @@
 import { pathExistsSync } from 'fs-extra'
 
+type BlogLink = {
+  title: string
+  url: string
+}
+
+type BlogTheme = {
+  components: {
+    home: any
+    page: any
+    post: any
+  }
+}
+
+type UserConfig = {
+  logo?: string
+  title: string
+  author: string
+  avatar?: string
+  homepage?: string
+  description?: string
+  links?: BlogLink[]
+  theme?: BlogTheme
+}
+
 function themeExists(theme: string) {
   return pathExistsSync(`node_modules/${theme}`)
 }
@@ -17,19 +41,7 @@ export function createTheme(theme?: string) {
   }
 }
 
-// export async function getStaticProps() {
-//   const { data: { site, posts } } = await allPosts()
-//   return { props: { site, posts } }
-// }
-
-// {
-//   name,
-//   logo,
-//   title,
-//   author,
-//   homepage,
-//   description,
-//   avatar,
-//   links,
-//   url
-// }
+export function blog(config: UserConfig) {
+  config.theme ||= createTheme()
+  return config
+}

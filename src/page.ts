@@ -20,19 +20,5 @@ export function createPage(path: string) {
   }
 }
 
-// this.isPost = [] === 'post'
-//   async outputJson() {
-//     for (let post of this.posts) {
-//       await fs.outputJson(`_api/${post.slug}.json`, {
-//         site: this.site,
-//         type: 'post',
-//         ...post
-//     for (let page of this.pages) {
-//       await fs.outputJson(`_api/${page.slug}.json`, {
-//         site: this.site,
-//         type: 'page',
-//         ...page
-// function pagesFilter({ slug }) {
-//   return page.fromPath(`_site/${slug}.html`)
 // function latest({ time }, target) {
 //   return Date.parse(time) - Date.parse(target.time)
