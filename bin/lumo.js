@@ -1,8 +1,10 @@
 #!/usr/bin/env node
-require('yargs')
-  .usage('Usage: $0 <command> [options]')
-  .commandDir('../lib/commands')
-  .detectLocale(false)
-  .demandCommand()
-  .help()
-  .argv
+const { click } = require('@tossdev/click')
+const { buildTask } = require('../dist/tasks/build')
+const { previewTask } = require('../dist/tasks/preview')
+
+click
+  .program('lumo')
+  .addTask(buildTask)
+  .addTask(previewTask)
+  .execute()
