@@ -22,3 +22,7 @@ export function createPage(path: string) {
 
 // function latest({ time }, target) {
 //   return Date.parse(time) - Date.parse(target.time)
+// {site
+// data
+// content}
+// createPage a, t

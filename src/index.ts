@@ -1,4 +1,4 @@
-import { pathExistsSync } from 'fs-extra'
+import { getLayoutPath } from './utils'
 
 type BlogLink = {
   title: string
@@ -7,9 +7,9 @@ type BlogLink = {
 
 type BlogTheme = {
   components: {
-    home: any
-    page: any
-    post: any
+    home: unknown
+    page: unknown
+    post: unknown
   }
 }
 
@@ -24,14 +24,8 @@ type UserConfig = {
   theme?: BlogTheme
 }
 
-function themeExists(theme: string) {
-  return pathExistsSync(`node_modules/${theme}`)
-}
-
 export function createTheme(theme?: string) {
-  const layoutPath =
-    theme && themeExists(theme) ? `${theme}/dist/layouts` : './blog'
-
+  const layoutPath = getLayoutPath(theme)
   return {
     components: {
       home: require(`${layoutPath}/home`),
@@ -41,7 +35,13 @@ export function createTheme(theme?: string) {
   }
 }
 
+function getUserConfig() {
+  return require(`${process.cwd()}/lumo.js`)
+}
+
 export function blog(config: UserConfig) {
   config.theme ||= createTheme()
   return config
 }
+
+// const [] =

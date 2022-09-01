@@ -1,3 +1,4 @@
+import { pathExistsSync } from 'fs-extra'
 import markdown from 'markdown-it'
 import shiki from 'shiki'
 
@@ -19,4 +20,11 @@ export async function gfm(source: string) {
   return renderer.render(source)
 }
 
+export function getLayoutPath(theme?: string) {
+  return theme && pathExistsSync(`node_modules/${theme}`)
+    ? `${theme}/dist/layouts`
+    : './blog'
+}
+
 // preact-render-to-string
+// return a func? layoutPath('home)

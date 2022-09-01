@@ -5,10 +5,6 @@ function getPaths() {
   return glob.sync('dist/contents/**/*.md')
 }
 
-function getUserConfig() {
-  return require(`${process.cwd()}/lumo.js`)
-}
-
 export class Blog {
   readonly paths: string[]
   readonly posts: any[]
@@ -28,3 +24,6 @@ export class Blog {
     }
   }
 }
+
+// Content title? layout?(post) date? draft:false!
+//   filter draft invalid_date
