@@ -1,32 +1,38 @@
-import matter from 'gray-matter'
-import { gfm } from './utils'
 import { readFileSync } from 'fs'
+import { gfm } from './utils/gfm'
+import matter from 'gray-matter'
 
 export type PageProps = {
   site: Record<string, any>
   page: Record<string, any>
-  content: string
+  content?: string
 }
 
 function getMatter(path: string) {
   return matter(readFileSync(path, 'utf-8'))
 }
 
-export function createPage(path?: string) {
+export function createPage(path: string) {
   const { data, content, excerpt } = getMatter(path)
   const { layout = 'page' } = data
+  const output = path.replace(/\.md$/, '/index.html')
 
-  async function outputHtml() {
-    const html = await gfm(content)
+  async function buildContext(site: Record<string, any>) {
+    const props: PageProps = { site, page: data }
+    console.log(content)
+    props.content = await gfm('content')
+    return props
   }
 
   return {
-    outputHtml,
-    excerpt,
     layout,
-    data,
+    output,
+    buildContext,
   }
 }
 
-// function latest({ time }, target) {
-//   return Date.parse(time) - Date.parse(target.time)
+// export function outputHtml(layout: unknown, aaaa: aaaaa) {
+// // // function latest({ time }, target) {
+// // //   return Date.parse(time) - Date.parse(target.time)
+// // excerpt,
+// // data,
