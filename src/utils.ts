@@ -1,5 +1,6 @@
-import markdown from 'markdown-it'
+import { pathExistsSync } from 'fs-extra'
 import { getHighlighter } from 'shiki'
+import markdown from 'markdown-it'
 
 export async function gfm(source: string) {
   const highlighter = await getHighlighter({
@@ -16,9 +17,7 @@ export async function gfm(source: string) {
   return renderer.render(source)
 }
 
-import { pathExistsSync } from 'fs-extra'
-
-export function getThemeLayout(theme?: string) {
+export function useTheme(theme?: string) {
   const layoutPath =
     theme && pathExistsSync(`node_modules/${theme}`)
       ? `${theme}/dist/layouts`

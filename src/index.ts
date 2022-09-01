@@ -20,6 +20,6 @@ export function blog(config: UserConfig = {}) {
 }
 
 export function getConfig() {
-  const configPath = `${process.cwd()}/lumo.js`
-  return pathExistsSync(configPath) ? require(configPath) : blog()
+  const path = `${process.cwd()}/lumo.js`
+  return pathExistsSync(path) ? require(path) : blog()
 }
