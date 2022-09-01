@@ -8,13 +8,13 @@ async function getHighlighter() {
   })
 }
 
-export function getImportLayout(theme?: string) {
+export function getThemeLayout(theme?: string) {
   const layoutPath =
     theme && pathExistsSync(`node_modules/${theme}`)
       ? `${theme}/dist/layouts`
       : './blog'
 
-  return function importLayout(layout: string) {
+  return function getLayout(layout: string) {
     return require(`${layoutPath}/${layout}`)
   }
 }
