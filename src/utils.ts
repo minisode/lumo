@@ -8,6 +8,17 @@ async function getHighlighter() {
   })
 }
 
+export function getImportLayout(theme?: string) {
+  const layoutPath =
+    theme && pathExistsSync(`node_modules/${theme}`)
+      ? `${theme}/dist/layouts`
+      : './blog'
+
+  return function importLayout(layout: string) {
+    return require(`${layoutPath}/${layout}`)
+  }
+}
+
 export async function gfm(source: string) {
   const highlighter = await getHighlighter()
   const renderer = markdown({
@@ -19,12 +30,3 @@ export async function gfm(source: string) {
 
   return renderer.render(source)
 }
-
-export function getLayoutPath(theme?: string) {
-  return theme && pathExistsSync(`node_modules/${theme}`)
-    ? `${theme}/dist/layouts`
-    : './blog'
-}
-
-// preact-render-to-string
-// return a func? layoutPath('home)
