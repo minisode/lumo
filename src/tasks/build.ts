@@ -1,4 +1,5 @@
 import { defineTask } from '@tossdev/click'
+import { getConfig } from '../index'
 import { Blog } from '../blog'
 
 export const buildTask = defineTask({
@@ -6,7 +7,8 @@ export const buildTask = defineTask({
   about: 'Build blog',
   handler(args, opts) {
     async function runTask() {
-      const blog = new Blog()
+      const config = getConfig()
+      const blog = new Blog(config)
       await blog.build()
     }
 

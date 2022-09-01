@@ -1,3 +1,5 @@
+import type { UserConfig } from './index'
+import { getImportLayout } from './utils'
 import { createPage } from './page'
 import glob from 'fast-glob'
 
@@ -6,11 +8,16 @@ function getPaths() {
 }
 
 export class Blog {
+  readonly layouts: Map<string, unknown>
   readonly paths: string[]
   readonly posts: any[]
 
-  constructor(config: any) {
+  constructor(config: UserConfig) {
     this.paths = getPaths()
+    const importLayout = getImportLayout(config.theme)
+    this.layouts.set('home', importLayout('home'))
+    this.layouts.set('page', importLayout('page'))
+    this.layouts.set('post', importLayout('post'))
   }
 
   async build() {
@@ -25,5 +32,6 @@ export class Blog {
   }
 }
 
-// Content title? layout?(post) date? draft:false!
-//   filter draft invalid_date
+// // Content title? layout?(post) date? draft:false!
+// //   filter draft invalid_date
+//   components: {

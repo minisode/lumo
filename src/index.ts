@@ -1,47 +1,25 @@
-import { getLayoutPath } from './utils'
+import { pathExistsSync } from 'fs-extra'
 
-type BlogLink = {
-  title: string
-  url: string
-}
-
-type BlogTheme = {
-  components: {
-    home: unknown
-    page: unknown
-    post: unknown
-  }
-}
-
-type UserConfig = {
+export type UserConfig = {
   logo?: string
-  title: string
-  author: string
+  title?: string
+  author?: string
   avatar?: string
   homepage?: string
   description?: string
-  links?: BlogLink[]
-  theme?: BlogTheme
+  theme?: string
+  links?: {
+    title: string
+    url: string
+  }[]
 }
 
-export function createTheme(theme?: string) {
-  const layoutPath = getLayoutPath(theme)
-  return {
-    components: {
-      home: require(`${layoutPath}/home`),
-      page: require(`${layoutPath}/page`),
-      post: require(`${layoutPath}/post`)
-    }
-  }
-}
-
-function getUserConfig() {
-  return require(`${process.cwd()}/lumo.js`)
-}
-
-export function blog(config: UserConfig) {
-  config.theme ||= createTheme()
+export function blog(config: UserConfig = {}) {
+  config.links ||= []
   return config
 }
 
-// const [] =
+export function getConfig() {
+  const configPath = `${process.cwd()}/lumo.js`
+  return pathExistsSync(configPath) ? require(configPath) : blog()
+}
