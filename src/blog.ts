@@ -1,6 +1,6 @@
 import type { UserConfig } from './index'
 import type { PageProps } from './page'
-import { getThemeLayout } from './utils/theme'
+import { getThemeLayout } from './utils'
 import { createPage } from './page'
 import groupBy from 'lodash/groupBy'
 import glob from 'fast-glob'

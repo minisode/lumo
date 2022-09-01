@@ -1,5 +1,5 @@
 import { readFileSync } from 'fs'
-import { gfm } from './utils/gfm'
+import { gfm } from './utils'
 import matter from 'gray-matter'
 
 export type PageProps = {
