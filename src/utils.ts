@@ -1,3 +1,4 @@
+import renderToString from 'preact-render-to-string'
 import { pathExistsSync } from 'fs-extra'
 import { getHighlighter } from 'shiki'
 import markdown from 'markdown-it'
@@ -15,6 +16,10 @@ export async function gfm(source: string) {
   })
 
   return renderer.render(source)
+}
+
+export function render(target: any, props: Record<string, any>) {
+  return renderToString(target.default(props))
 }
 
 export function useTheme(theme?: string) {
