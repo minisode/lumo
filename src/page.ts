@@ -1,3 +1,4 @@
+import { outputFileSync } from 'fs-extra'
 import { readFileSync } from 'fs'
 import { gfm } from './utils'
 import gm from 'gray-matter'
@@ -19,7 +20,7 @@ function getOutputPath(path: string) {
 export function createPage(path: string) {
   const { data, content, excerpt } = matter(path)
   const layout = (data.layout as string) || 'page'
-  const outputPath = getOutputPath(path)
+  const destPath = getOutputPath(path)
 
   async function build(site: Record<string, any>) {
     const props: PageProps = { site, page: data }
@@ -27,16 +28,18 @@ export function createPage(path: string) {
     return props
   }
 
+  function output(content: string) {
+    outputPage(destPath, content)
+  }
+
   return {
-    outputPath,
+    destPath,
     layout,
+    output,
     build
   }
 }
 
-// function latest({ time }, target) {
-//   return Date.parse(time) - Date.parse(target.time)
-// import groupBy from 'lodash/groupBy'
-// console.log(Object.values(groupBy(this.posts.map((_, n) => n), (n) => ~~(n / 3))))
-// Content title? layout?(post) date? draft:false!
-//   filter draft invalid_date
+export function outputPage(destPath: string, data: string) {
+  outputFileSync(destPath, data)
+}
