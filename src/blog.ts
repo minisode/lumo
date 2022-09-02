@@ -1,7 +1,8 @@
+import render from 'preact-render-to-string'
 import type { UserConfig } from './index'
 import type { PageProps } from './page'
 import { createPage } from './page'
-import { useTheme, render } from './utils'
+import { useTheme } from './utils'
 import glob from 'fast-glob'
 
 type Post = {
@@ -30,11 +31,11 @@ export class Blog {
     for (const path of this.paths) {
       const page = createPage(path)
       const data = await page.build(this.config)
+      const html = this.renderToString(page.layout, data)
+
       if (page.layout === 'post') {
         this.posts.push(data.page)
       }
-
-      console.log(this.renderToString(page.layout, data))
     }
 
     this.buildPosts()
@@ -43,7 +44,8 @@ export class Blog {
   private async buildPosts() {}
 
   private renderToString(layout: string, props: PageProps) {
-    return render(this.layouts.get(layout) as any, props)
+    const _layout = this.layouts.get(layout) as any
+    return render(_layout.default(props))
   }
 
   private setLayouts(theme?: string) {
