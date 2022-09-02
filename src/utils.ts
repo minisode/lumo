@@ -23,7 +23,7 @@ export function useTheme(theme?: string) {
       ? `${theme}/dist/layouts`
       : './theme'
 
-  return function getLayout(layout: string) {
+  return function useLayout(layout: string) {
     return require(`${layoutPath}/${layout}`)
   }
 }

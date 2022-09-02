@@ -1,4 +1,6 @@
+import renderToString from 'preact-render-to-string'
 import type { UserConfig } from './index'
+import type { PageProps } from './page'
 import { createPage } from './page'
 import { useTheme } from './utils'
 import glob from 'fast-glob'
@@ -39,10 +41,15 @@ export class Blog {
 
   private async buildPosts() {}
 
+  private renderToString(layout: string, props: PageProps) {
+    const layoutObject = this.layouts.get(layout) as any
+    return renderToString(layoutObject.default(props))
+  }
+
   private setLayouts(theme?: string) {
-    const getLayout = useTheme(theme)
-    this.layouts.set('home', getLayout('home'))
-    this.layouts.set('page', getLayout('page'))
-    this.layouts.set('post', getLayout('post'))
+    const useLayout = useTheme(theme)
+    this.layouts.set('home', useLayout('home'))
+    this.layouts.set('page', useLayout('page'))
+    this.layouts.set('post', useLayout('post'))
   }
 }
