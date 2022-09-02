@@ -17,9 +17,9 @@ function getPaths() {
   return glob.sync('dist/contents/**/*.md')
 }
 
-function paginate(items: any[]) {
-  const groups = groupBy(range(items.length), (num) => ~~(num / 3))
-  return Object.values(groups).map((num) => num.map((num) => items[num]))
+function paginate(items: any[], perPage: number = 10) {
+  const groups = groupBy(range(items.length), (num) => ~~(num / perPage))
+  return Object.values(groups).map((num) => num.map((index) => items[index]))
 }
 
 export class Blog {
@@ -49,7 +49,12 @@ export class Blog {
   }
 
   private async buildPosts() {
-    console.log(paginate(this.posts))
+    for (const posts of paginate(this.posts, 3)) {
+      const html = this.renderToString('home', {
+        site: { posts },
+        page: {}
+      })
+    }
   }
 
   private renderToString(layout: string, props: PageProps) {
