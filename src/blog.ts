@@ -1,8 +1,10 @@
 import render from 'preact-render-to-string'
+import { createPage, outputPage } from './page'
 import type { UserConfig } from './index'
 import type { PageProps } from './page'
-import { createPage } from './page'
 import { useTheme } from './utils'
+import groupBy from 'lodash/groupBy'
+import range from 'lodash/range'
 import glob from 'fast-glob'
 
 type Post = {
@@ -13,6 +15,11 @@ type Post = {
 
 function getPaths() {
   return glob.sync('dist/contents/**/*.md')
+}
+
+function paginate(items: any[]) {
+  const groups = groupBy(range(items.length), (num) => ~~(num / 3))
+  return Object.values(groups).map((num) => num.map((num) => items[num]))
 }
 
 export class Blog {
@@ -41,7 +48,9 @@ export class Blog {
     this.buildPosts()
   }
 
-  private async buildPosts() {}
+  private async buildPosts() {
+    console.log(paginate(this.posts))
+  }
 
   private renderToString(layout: string, props: PageProps) {
     const _layout = this.layouts.get(layout) as any

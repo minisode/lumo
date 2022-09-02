@@ -20,7 +20,7 @@ function getOutputPath(path: string) {
 export function createPage(path: string) {
   const { data, content, excerpt } = matter(path)
   const layout = (data.layout as string) || 'page'
-  const destPath = getOutputPath(path)
+  const dest = getOutputPath(path)
 
   async function build(site: Record<string, any>) {
     const props: PageProps = { site, page: data }
@@ -29,17 +29,17 @@ export function createPage(path: string) {
   }
 
   function output(content: string) {
-    outputPage(destPath, content)
+    outputPage(dest, content)
   }
 
   return {
-    destPath,
     layout,
     output,
-    build
+    build,
+    dest
   }
 }
 
-export function outputPage(destPath: string, data: string) {
-  outputFileSync(destPath, data)
+export function outputPage(dest: string, data: string) {
+  outputFileSync(dest, data)
 }
