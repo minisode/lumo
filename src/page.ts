@@ -17,6 +17,22 @@ function destPath(path: string) {
   return path.replace(/dist\/contents\//, '').replace(/\.md$/, '/index.html')
 }
 
+function renderPage({ site, page, content }: PageProps) {
+  return `<!DOCTYPE html>
+  <html>
+    <head>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="stylesheet" href="/assets/index.css" />
+      <title>${site.title || page.title}</title>
+    </head>
+    <body>
+      <div id="app">${content}</div>
+      <script src="/dist/blog.js"></script>
+    </body>
+  </html>`
+}
+
 export function createPage(path: string) {
   const { data, content, excerpt } = matter(path)
   const layout = (data.layout as string) || 'page'
@@ -28,8 +44,8 @@ export function createPage(path: string) {
     return props
   }
 
-  function output(content: string) {
-    outputPage(dest, content)
+  function output(props: PageProps) {
+    outputPage(dest, props)
   }
 
   return {
@@ -40,6 +56,6 @@ export function createPage(path: string) {
   }
 }
 
-export function outputPage(dest: string, data: string) {
-  outputFileSync(`dist/${dest}`, data)
+export function outputPage(dest: string, props: PageProps) {
+  outputFileSync(`dist/${dest}`, props.content)
 }

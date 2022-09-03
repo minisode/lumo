@@ -38,14 +38,14 @@ export class Blog {
     for (const path of this.paths) {
       const page = createPage(path)
       const data = await page.build(this.config)
-      const html = this.renderToString(page.layout, data)
+      const content = this.renderToString(page.layout, data)
 
       if (page.layout === 'post') {
         const slug = page.dest.replace(/\/index.html$/, '')
         this.posts.push({ ...data.page, url: `/${slug}` })
       }
 
-      page.output(html)
+      page.output({ ...data, content })
     }
 
     this.buildPosts()
@@ -57,12 +57,13 @@ export class Blog {
 
     for (const [num, posts] of entries) {
       const dest = `${~~num + 1}/index.html`.replace(/^1\//, '')
-      const html = this.renderToString('home', {
+      const content = this.renderToString('home', {
         site: { posts },
         page: {}
       })
 
-      outputPage(dest, html)
+      const props = { site: {}, page: {}, content }
+      outputPage(dest, props)
     }
   }
 
