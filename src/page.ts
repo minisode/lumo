@@ -14,7 +14,7 @@ function matter(path: string) {
 }
 
 function destPath(path: string) {
-  return path.replace(/dist\/contents/, 'dist').replace(/\.md$/, '/index.html')
+  return path.replace(/dist\/contents\//, '').replace(/\.md$/, '/index.html')
 }
 
 export function createPage(path: string) {
@@ -41,5 +41,5 @@ export function createPage(path: string) {
 }
 
 export function outputPage(dest: string, data: string) {
-  outputFileSync(dest, data)
+  outputFileSync(`dist/${dest}`, data)
 }
