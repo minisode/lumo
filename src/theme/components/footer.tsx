@@ -1,8 +1,10 @@
-type FooterProps = {
+export default function Footer({
+  author,
+  homepage
+}: {
   author: string
-}
-
-export default function Footer({ author }: FooterProps) {
+  homepage?: string
+}) {
   return (
     <footer>
       <div class="container mx-auto p-5">

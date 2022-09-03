@@ -1,21 +1,21 @@
-type PostItemProps = {
+export default function PostItem(props: {
   title: string
-  slug: string
-  time: string
-}
-
-export default function PostItem({ title, slug, time }: PostItemProps) {
+  date: string
+  url: string
+}) {
   return (
     <li class="py-3">
-      <time class="text-sm text-gray-600">{time}</time>
+      <time class="text-sm text-gray-600">{props.date}</time>
       <h3>
         <a
-          href={`/${slug}`}
+          href={`/${props.url}`}
           class="font-bold text-lg leading-10 underline truncate"
         >
-          {title}
+          {props.title}
         </a>
       </h3>
     </li>
   )
 }
+
+// dayjs(time).format('ll')

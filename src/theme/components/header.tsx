@@ -1,9 +1,10 @@
-type HeaderProps = {
+export default function Header({
+  logo,
+  paths
+}: {
   logo: string
   paths: string[]
-}
-
-export default function Header({ logo, paths }: HeaderProps) {
+}) {
   return (
     <header>
       <div class="container mx-auto p-5">
