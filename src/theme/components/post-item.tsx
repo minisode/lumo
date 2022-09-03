@@ -8,7 +8,7 @@ export default function PostItem(props: {
       <time class="text-sm text-gray-600">{props.date}</time>
       <h3>
         <a
-          href={`/${props.url}`}
+          href={props.url}
           class="font-bold text-lg leading-10 underline truncate"
         >
           {props.title}

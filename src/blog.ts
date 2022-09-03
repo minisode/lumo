@@ -41,7 +41,8 @@ export class Blog {
       const html = this.renderToString(page.layout, data)
 
       if (page.layout === 'post') {
-        this.posts.push(data.page)
+        const slug = page.dest.replace(/\/index.html$/, '')
+        this.posts.push({ ...data.page, url: `/${slug}` })
       }
 
       page.output(html)
