@@ -1,9 +1,9 @@
-import { Layout } from './default'
 import PostItem from './components/post-item'
+import Layout from './default'
 
-export default function HomeComponent({ site }) {
+export default function HomeLayout({ site }: { site: Record<string, any> }) {
   return (
-    <Layout>
+    <Layout site={site}>
       <ul>
         {site.posts.map((props, _) => (
           <PostItem {...props} />

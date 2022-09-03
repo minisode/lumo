@@ -1,11 +1,23 @@
 import PostHead from './components/post-head'
-import { Layout } from './default'
+import Layout from './default'
 
-export default function PostComponent({ site, title, body, time, type }) {
+export default function PostLayout({
+  site,
+  page,
+  content
+}: {
+  site: Record<string, any>
+  page: Record<string, any>
+  content: string
+}) {
+  const { author, title, time } = page
   return (
-    <Layout>
-      {type === 'post' && <PostHead {...{ title, time }} />}
-      <div class="markdown-body" dangerouslySetInnerHTML={{ __html: body }} />
+    <Layout site={site}>
+      <PostHead {...{ author, title, time }} />
+      <div
+        class="markdown-body"
+        dangerouslySetInnerHTML={{ __html: content }}
+      />
     </Layout>
   )
 }
