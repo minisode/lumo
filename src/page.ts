@@ -57,5 +57,5 @@ export function createPage(path: string) {
 }
 
 export function outputPage(dest: string, props: PageProps) {
-  outputFileSync(`dist/${dest}`, props.content)
+  outputFileSync(`dist/${dest}`, renderPage(props))
 }
