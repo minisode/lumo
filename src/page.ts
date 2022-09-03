@@ -13,14 +13,14 @@ function matter(path: string) {
   return gm(readFileSync(path, 'utf-8'))
 }
 
-function getOutputPath(path: string) {
+function destPath(path: string) {
   return path.replace(/dist\/contents/, 'dist').replace(/\.md$/, '/index.html')
 }
 
 export function createPage(path: string) {
   const { data, content, excerpt } = matter(path)
   const layout = (data.layout as string) || 'page'
-  const dest = getOutputPath(path)
+  const dest = destPath(path)
 
   async function build(site: Record<string, any>) {
     const props: PageProps = { site, page: data }

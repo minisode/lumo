@@ -49,7 +49,11 @@ export class Blog {
   }
 
   private async buildPosts() {
-    for (const posts of paginate(this.posts, 3)) {
+    const groups = paginate(this.posts, 3)
+    const entries = Object.entries(groups)
+
+    for (const [index, posts] of entries) {
+      const dest = `/${~~index + 1}/index.html`.replace(/^\/1\//, '/')
       const html = this.renderToString('home', {
         site: { posts },
         page: {}
