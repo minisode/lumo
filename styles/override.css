@@ -1,0 +1,85 @@
+body {
+  font-family: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  background-color: #fafafa;
+  color: #3f3b34;
+}
+
+header ul li:not(:first-child) {
+  margin-left: 1rem;
+}
+
+footer a {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+code, kbd, pre, samp {
+  font-family: "JetBrains Mono", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+.container {
+  max-width: 768px;
+}
+
+.highlight span.gd {
+  color: #c2255c;
+  background-color: #ffe3e3;
+}
+
+.highlight span.gi {
+  color: #087f5b;
+  background-color: #d3f9d8;
+}
+
+.markdown-body {
+  font-family: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+}
+
+.markdown-body blockquote {
+  border-color: #e9eae7;
+  padding: 0.75rem 0.75rem;
+  background-color: #f5f6f2;
+}
+
+.markdown-body code {
+  -webkit-font-smoothing: auto;
+}
+
+.markdown-body p > code {
+  color: #4a5568;
+  background-color: #f5f6f2;
+}
+
+.markdown-body .highlight pre,
+.markdown-body pre {
+  font-size: 95%;
+  line-height: 1.75;
+  background-color: #f5f6f2;
+}
+
+.markdown-body ul,
+.markdown-body ol {
+  list-style: square;
+}
+
+.markdown-body li,
+.markdown-body th,
+.markdown-body td {
+  line-height: 1.75;
+}
+
+.markdown-body p {
+  line-height: 1.75;
+}
+
+.markdown-body a {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+::selection {
+  color: #0b7285;
+  background-color: #c5f6fa;
+}
