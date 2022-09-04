@@ -23,6 +23,7 @@ function renderPage({ site, page, content }: PageProps) {
     <head>
       <meta charset="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="stylesheet" href="https://unpkg.com/@primer/css@20.4.4/dist/markdown.css" />
       <link rel="stylesheet" href="/assets/index.css" />
       <title>${site.title || page.title}</title>
     </head>
